@@ -29,19 +29,22 @@ public class HashTableLinearProbing {
     }
     public String get(String key) {
         int index = hash(key, arr.length);
-        if (arr[index] == null) return null;
         Entry e = arr[index];
         if (!arr[index].getKey().equals(key)) {
-            for (int i = 0; i < arr.length-index; i++) {
-                if (arr[index+i].getKey().equals(key)) {
-                    e = arr[index+i];
-                    return e.getVal();
-                }
-            }
+            getIterator(key, index, e);
         } else {
             e = arr[index];
         }
         return e.getVal();
+    }
+    private String getIterator(String key, int index, Entry e) {
+        for (int i = 0; i < arr.length-index; i++) {
+            if (arr[index + i].getKey().equals(key)) {
+                e = arr[index + i];
+                return e.getVal();
+            }
+        }
+        return null;
     }
     public ArrayList<String> keySet() {
         return keysList;

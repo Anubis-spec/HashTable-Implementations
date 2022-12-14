@@ -5,8 +5,8 @@ public class HashTableChaining {
     private int counter = 0;
     private ArrayList<String> keysList = new ArrayList<>();
     private double MAX_LOAD = 0.6;
-
-    private ArrayList<Entry>[] arr = new ArrayList[100];
+    private int STORAGE = 100;
+    private ArrayList<Entry>[] arr = new ArrayList[STORAGE];
 
     public void put(String key, String value) {
         if (counter > (MAX_LOAD * arr.length)) {
@@ -26,11 +26,15 @@ public class HashTableChaining {
     public String get(String key) {
         int index = hash(key, arr.length);
         if (arr[index] != null) {
-            for (int i = 0; i < arr[index].size(); i++) {
-                if (arr[index].get(i).getKey().equals(key)) {
-                    Entry e = arr[index].get(i);
-                    return e.getVal();
-                }
+            return getIterator(key, index);
+        }
+        return null;
+    }
+    public String getIterator(String key, int index) {
+        for (int i = 0; i < arr[index].size(); i++) {
+            if (arr[index].get(i).getKey().equals(key)) {
+                Entry e = arr[index].get(i);
+                return e.getVal();
             }
         }
         return null;
@@ -52,7 +56,6 @@ public class HashTableChaining {
         return newArr;
     }
     public int size() {
-        System.out.println(Arrays.toString(arr));
         return counter;
     }
     private int hash(String in, int n) {
