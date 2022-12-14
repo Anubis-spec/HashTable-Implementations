@@ -5,11 +5,10 @@ public class Main {
         HashTableChaining chain = new HashTableChaining();
         HashTableLinearProbing linear = new HashTableLinearProbing();
 
-        linear.put("David", "45");
-        linear.put("Vishy", "93");
-        linear.put("Khan", "73");
-        linear.put("Daniel", "34");
-        System.out.println(linear.size());
-        System.out.println(linear.keySet());
+        chain.put("Vishy", "93");
+        chain.put("Khan", "73");
+        chain.put("Daniel", "34");
+        System.out.println(chain.size());
+        System.out.println(chain.keySet());
     }
 }

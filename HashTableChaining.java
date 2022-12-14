@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class HashTableChaining {
     private int counter = 0;
@@ -14,7 +15,6 @@ public class HashTableChaining {
         Entry e = new Entry(key, value);
         int index = hash(key, arr.length);
         if (arr[index] != null) {
-            System.err.println("Collision at index (Adding to arraylist): " + index);
             arr[index] = new ArrayList<>();
             arr[index].add(e);
         }
@@ -25,10 +25,12 @@ public class HashTableChaining {
     }
     public String get(String key) {
         int index = hash(key, arr.length);
-        for (int i = 0; i < arr[index].size(); i++) {
-            if (arr[index].get(i).getKey().equals(key)) {
-                Entry e = arr[index].get(i);
-                return e.getVal();
+        if (arr[index] != null) {
+            for (int i = 0; i < arr[index].size(); i++) {
+                if (arr[index].get(i).getKey().equals(key)) {
+                    Entry e = arr[index].get(i);
+                    return e.getVal();
+                }
             }
         }
         return null;
@@ -50,6 +52,7 @@ public class HashTableChaining {
         return newArr;
     }
     public int size() {
+        System.out.println(Arrays.toString(arr));
         return counter;
     }
     private int hash(String in, int n) {

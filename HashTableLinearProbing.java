@@ -15,7 +15,6 @@ public class HashTableLinearProbing {
         Entry e = new Entry(key, value);
         int index = hash(key, arr.length);
         if (arr[index] != null) {
-            System.err.println("Collision at index: " + index);
             for (int i = 0; i < arr.length-index; i++) {
                 if (arr[index+i] == null) {
                     arr[index+i] = e;
