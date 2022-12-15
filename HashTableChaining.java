@@ -10,7 +10,7 @@ public class HashTableChaining {
 
     public void put(String key, String value) {
         if (counter > (MAX_LOAD * arr.length)) {
-            arr = overflow();
+            overflow();
         }
         Entry e = new Entry(key, value);
         int index = hash(key, arr.length);
@@ -21,7 +21,7 @@ public class HashTableChaining {
         arr[index] = new ArrayList<>();
         arr[index].add(e);
         counter++;
-        if (!keysList.contains(key)) keysList.add(key);
+        keysList.add(key);
     }
     public String get(String key) {
         int index = hash(key, arr.length);
@@ -53,7 +53,8 @@ public class HashTableChaining {
                 }
             }
         }
-        return newArr;
+        arr = newArr;
+        return arr;
     }
     public int size() {
         return counter;

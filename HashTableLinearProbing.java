@@ -10,7 +10,7 @@ public class HashTableLinearProbing {
 
     public void put(String key, String value) {
         if (counter > (MAX_LOAD * arr.length)) {
-            arr = overflow();
+            overflow();
         }
         Entry e = new Entry(key, value);
         int index = hash(key, arr.length);
@@ -25,7 +25,7 @@ public class HashTableLinearProbing {
             arr[index] = e;
         }
         counter++;
-        if (!keysList.contains(key)) keysList.add(key);
+        keysList.add(key);
     }
     public String get(String key) {
         int index = hash(key, arr.length);
@@ -57,7 +57,8 @@ public class HashTableLinearProbing {
                 newArr[newIndex] = entry;
             }
         }
-        return newArr;
+        arr = newArr;
+        return arr;
     }
     public int size() {
         System.out.println(Arrays.toString(arr));
