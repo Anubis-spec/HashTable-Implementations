@@ -14,37 +14,24 @@ public class HashTableLinearProbing {
         }
         Entry e = new Entry(key, value);
         int index = hash(key, arr.length);
-        if (arr[index] != null) {
-            for (int i = 0; i < arr.length-index; i++) {
-                if (arr[index+i] == null) {
-                    arr[index+i] = e;
-                    break;
-                }
-            }
-        } else {
-            arr[index] = e;
+        while (arr[index] != null) {
+            index++;
+            index = index % arr.length;
         }
+        arr[index] = e;
         counter++;
         keysList.add(key);
     }
     public String get(String key) {
         int index = hash(key, arr.length);
         Entry e = arr[index];
-        if (!arr[index].getKey().equals(key)) {
-            getIterator(key, index, e);
-        } else {
-            e = arr[index];
+        while (arr[index] != null && !arr[index].key.equals(key)) {
+            index++;
+            index = index % arr.length;
         }
-        return e.getVal();
-    }
-    private String getIterator(String key, int index, Entry e) {
-        for (int i = 0; i < arr.length-index; i++) {
-            if (arr[index + i].getKey().equals(key)) {
-                e = arr[index + i];
-                return e.getVal();
-            }
-        }
-        return null;
+
+        if (arr[index] == null) return null;
+        return arr[index].value;
     }
     public ArrayList<String> keySet() {
         return keysList;

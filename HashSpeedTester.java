@@ -7,7 +7,7 @@ public class HashSpeedTester {
     private static final int KEY_LENGTH = 4;
 
     public static void main(String[] args) {
-        HashTableChaining map = new HashTableChaining();
+        HashTableLinearProbing map = new HashTableLinearProbing();
 
         ArrayList<String> data = makeRandomStringList(MAX_ITEMS_TO_STORE, KEY_LENGTH);
 
